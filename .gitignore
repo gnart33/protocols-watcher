@@ -7,3 +7,5 @@ reports/
 venv/
 **/.DS_Store
 data/
+
+/.quarto/
