@@ -30,3 +30,12 @@ def load_psdn_ocean_staking():
     psdn__ocean_staking_contract_data["TokenValue"] = [float(str(i).replace(",", "")) for i in psdn__ocean_staking_contract_data["TokenValue"]]
     return psdn__ocean_staking_contract_data
 
+
+def load_psdn_transfers():
+    psdn_transfers_file = 'data/export-token-0xa5b947687163fe88c3e6af5b17ae69896f4abccf-psdn-transfers.csv'
+    psdn_transfers = pd.read_csv(psdn_transfers_file)
+
+    psdn_transfers['DateTime'] = pd.to_datetime(psdn_transfers['DateTime'])
+    psdn_transfers["Quantity"] = [float(str(i).replace(",", "")) for i in psdn_transfers["Quantity"]]
+    return psdn_transfers
+
