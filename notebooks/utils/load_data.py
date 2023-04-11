@@ -1,5 +1,11 @@
 import pandas as pd
+import ctc
 import os
+import requests
+# from constants import psdn_ocean_contract_address, lp_staking_address, psdn_ocean_staking_contract_address
+from_block = 15767026
+to_block = 17022224
+
 def load_psdn_ocean_transfers():
     """Load the PSDN Ocean data from a CSV file"""
     psdn_ocean_data_file = 'data/export-token-0x51fa2efd62ee56a493f24ae963eace7d0051929e-psdnocean.csv'
@@ -38,4 +44,19 @@ def load_psdn_transfers():
     psdn_transfers['DateTime'] = pd.to_datetime(psdn_transfers['DateTime'])
     psdn_transfers["Quantity"] = [float(str(i).replace(",", "")) for i in psdn_transfers["Quantity"]]
     return psdn_transfers
+
+
+def logs_table_from_etherscan(contract_address):
+    """Logs table of a contract, pulled form etherscan.io"""
+    ETHERSCAN_TOKEN = os.environ['ETHERSCAN_TOKEN']
+    _url = f"""https://api.etherscan.io/api?module=logs&action=getLogs&address={contract_address}&fromBlock={from_block}&toBlock={to_block}&page=1&offset=1000&apikey={ETHERSCAN_TOKEN}"""
+    request = requests.post(_url)
+    data = request.json()['result']
+    df = pd.DataFrame.from_records(data)
+    df['blockNumber'] = df[ 'blockNumber'].apply(int, base=16)
+    df['timeStamp'] = df[ 'timeStamp'].apply(int, base=16)
+    # 
+    df['DateTime'] = pd.to_datetime(df['timeStamp'], unit='s')
+    return df
+
 

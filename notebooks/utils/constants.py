@@ -1,0 +1,3 @@
+psdn_ocean_contract_address = '0x51Fa2efd62ee56a493f24AE963eAce7D0051929E'
+lp_staking_address = '0x08D3f2cAe4eaCDCbFb0f7FfaD07a6d00FC36Db6E' # psdnOcean-ocean lp
+psdn_ocean_staking_contract_address = '0xEb1CEFa6F175B4c889582DFEea4ee155CCD5D2A5'
