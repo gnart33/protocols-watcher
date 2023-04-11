@@ -2,9 +2,17 @@ import pandas as pd
 import ctc
 import os
 import requests
+import time
 # from constants import psdn_ocean_contract_address, lp_staking_address, psdn_ocean_staking_contract_address
 from_block = 15767026
-to_block = 17022224
+# to_block = 17022224
+ETHERSCAN_TOKEN = os.environ['ETHERSCAN_TOKEN']
+
+def get_current_block():
+    current_timestamp = ts = int(time.time())
+    _url = f"""https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp={current_timestamp}&closest=before&apikey={ETHERSCAN_TOKEN}"""
+    request = requests.post(_url)
+    return int(request.json()['result'])
 
 def load_psdn_ocean_transfers():
     """Load the PSDN Ocean data from a CSV file"""
@@ -48,7 +56,7 @@ def load_psdn_transfers():
 
 def logs_table_from_etherscan(contract_address):
     """Logs table of a contract, pulled form etherscan.io"""
-    ETHERSCAN_TOKEN = os.environ['ETHERSCAN_TOKEN']
+    to_block = get_current_block()
     _url = f"""https://api.etherscan.io/api?module=logs&action=getLogs&address={contract_address}&fromBlock={from_block}&toBlock={to_block}&page=1&offset=1000&apikey={ETHERSCAN_TOKEN}"""
     request = requests.post(_url)
     data = request.json()['result']
