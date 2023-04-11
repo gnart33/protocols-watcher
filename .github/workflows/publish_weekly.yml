@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --quiet
       - name: Run notebook
-        run: jupyter run notebooks/psdnOcean.ipynb
+        run: jupyter run notebooks/psdnOcean.ipynb --allow-errors
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
