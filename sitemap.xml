@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/trangnv/protocols-watcher/notebooks/psdnOcean.nbconvert.html</loc>
-    <lastmod>2023-04-11T10:28:28.292Z</lastmod>
-  </url>
-  <url>
     <loc>https://github.com/trangnv/protocols-watcher/notebooks/xPSDN-ETH1-staking.html</loc>
-    <lastmod>2023-04-11T10:28:30.632Z</lastmod>
+    <lastmod>2023-04-11T11:32:04.899Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/trangnv/protocols-watcher/notebooks/psdnOcean_input.html</loc>
-    <lastmod>2023-04-11T10:28:32.640Z</lastmod>
+    <loc>https://github.com/trangnv/protocols-watcher/notebooks/psdnOcean.html</loc>
+    <lastmod>2023-04-11T11:32:06.663Z</lastmod>
   </url>
 </urlset>
