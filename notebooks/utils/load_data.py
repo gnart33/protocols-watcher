@@ -3,13 +3,14 @@ import ctc
 import os
 import requests
 import time
-# from constants import psdn_ocean_contract_address, lp_staking_address, psdn_ocean_staking_contract_address
+from dotenv import load_dotenv
+load_dotenv()
 from_block = 15767026
-# to_block = 17022224
-ETHERSCAN_TOKEN = os.environ['ETHERSCAN_TOKEN']
+ETHERSCAN_TOKEN = os.getenv('ETHERSCAN_TOKEN')
 
 def get_current_block():
-    current_timestamp = ts = int(time.time())
+    current_timestamp = int(time.time())
+    print(ETHERSCAN_TOKEN)
     _url = f"""https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp={current_timestamp}&closest=before&apikey={ETHERSCAN_TOKEN}"""
     request = requests.post(_url)
     return int(request.json()['result'])
