@@ -10,7 +10,6 @@ ETHERSCAN_TOKEN = os.getenv('ETHERSCAN_TOKEN')
 
 def get_current_block():
     current_timestamp = int(time.time())
-    print(ETHERSCAN_TOKEN)
     _url = f"""https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp={current_timestamp}&closest=before&apikey={ETHERSCAN_TOKEN}"""
     request = requests.post(_url)
     return int(request.json()['result'])

@@ -32,14 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --quiet
       - name: Run notebook
-        run: jupyter nbconvert --to notebook --execute notebooks/psdnOcean_input.ipynb --output=psdnOcean.ipynb
-      # - name: Commit and Push Changes
-      #   run: |
-      #     git config --local user.email "actions@github.com"
-      #     git config --local user.name "GitHub Actions"
-      #     git add notebooks/psdnOcean.ipynb
-      #     git commit -m "Updated on `date` with GitHub Actions" || echo "No Changes to Commit"
-      #     git push origin main || echo "No Changes to Commit"
+        run: jupyter nbconvert --execute --inplace notebooks/psdnOcean.ipynb
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
