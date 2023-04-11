@@ -1,0 +1,45 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 4"
+
+name: Quarto Publish weekly
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python {{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set env variables
+        run: |
+          echo "ETHERSCAN_TOKEN=${{ secrets.ETHERSCAN_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        working-directory: ${{ github.workspace }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --quiet
+      - name: Run notebook
+        run: jupyter run notebooks/psdnOcean.ipynb
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
