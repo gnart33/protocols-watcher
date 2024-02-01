@@ -1,1 +1,1 @@
-Sitemap: https://github.com/trangnv/protocols-watcher/sitemap.xml
+Sitemap: https://trangnv.github.io/protocols-watcher/sitemap.xml
